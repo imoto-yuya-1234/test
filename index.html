@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Standard Analog Configuration</title>
+  <title>Edge Analog Configuration</title>
   <link rel='stylesheet' type='text/css' href='css/slate.min.css'>
   <script src='js/slate.min.js'></script>
   <style>
@@ -18,7 +18,7 @@
   </head>
 
   <body>
-    <h1 class='title'>Standard Analog Configuration</h1>
+    <h1 class='title'>Edge Analog Configuration</h1>
 
     <div class='item-container'>
       <div class='item-container-content'>
@@ -51,8 +51,8 @@
     <div class='item-container'>
       <div class='item-container-content'>
         <label class='item'>
-          Day of the week
-          <input id='show_day_checkbox' type='checkbox' class='item-toggle'>
+          Date
+          <input id='show_date_checkbox' type='checkbox' class='item-toggle'>
         </label>
       </div>
     </div>
@@ -71,6 +71,16 @@
         <label class='item'>
           Battery state
           <input id='show_battery_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Round color
+          <input id='round_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
         </label>
       </div>
     </div>
@@ -100,18 +110,20 @@
     var invertCheckbox = document.getElementById('invert_checkbox');
     var connectionCheckbox = document.getElementById('connection_checkbox');
     var showticksCheckbox = document.getElementById('show_ticks_checkbox');
-    var showdayCheckbox = document.getElementById('show_day_checkbox');
+    var showdateCheckbox = document.getElementById('show_date_checkbox');
     var showsecondCheckbox = document.getElementById('show_second_checkbox');
     var showbatteryCheckbox = document.getElementById('show_battery_checkbox');
+    var roundColorPicker = document.getElementById('round_color_picker');
     var langSelect = document.getElementById('lang_select');
  
     var options = {
       'invert': invertCheckbox.checked,
       'connection': connectionCheckbox.checked,
       'show_ticks': showticksCheckbox.checked,
-      'show_day': showdayCheckbox.checked,
+      'show_date': showdateCheckbox.checked,
       'show_second': showsecondCheckbox.checked,
       'show_battery': showbatteryCheckbox.checked,
+      'round_color': roundColorPicker.value,
       'lang': langSelect.value
     };
 
@@ -119,9 +131,10 @@
     localStorage['invert'] = options['invert'];
     localStorage['connection'] = options['connection'];
     localStorage['show_ticks'] = options['show_ticks'];
-    localStorage['show_day'] = options['show_day'];
+    localStorage['show_date'] = options['show_date'];
     localStorage['show_second'] = options['show_second'];
     localStorage['show_battery'] = options['show_battery'];
+    localStorage['round_color'] = options['round_color'];
     localStorage['lang'] = options['lang'];
 
     console.log('Got options: ' + JSON.stringify(options));
@@ -153,20 +166,22 @@
     var invertCheckbox = document.getElementById('invert_checkbox');
     var connectionCheckbox = document.getElementById('connection_checkbox');
     var showticksCheckbox = document.getElementById('show_ticks_checkbox');
-    var showdayCheckbox = document.getElementById('show_day_checkbox');
+    var showdateCheckbox = document.getElementById('show_date_checkbox');
     var showsecondCheckbox = document.getElementById('show_second_checkbox');
     var showbatteryCheckbox = document.getElementById('show_battery_checkbox');
+    var roundColorPicker = document.getElementById('round_color_picker');
     var langSelect = document.getElementById('lang_select');
 
     // Load any previously saved configuration, if available
     invertCheckbox.checked = JSON.parse(localStorage['invert']);
     connectionCheckbox.checked = JSON.parse(localStorage['connection']);
     showticksCheckbox.checked = JSON.parse(localStorage['show_ticks']);
-    showdayCheckbox.checked = JSON.parse(localStorage['show_day']);
+    showdateCheckbox.checked = JSON.parse(localStorage['show_date']);
     showsecondCheckbox.checked = JSON.parse(localStorage['show_second']);
     showbatteryCheckbox.checked = JSON.parse(localStorage['show_battery']);
+    roundColorPicker.value = localStorage['round_color'];
     langSelect.value = localStorage['lang'];
-
+    
   })();
   </script>
 </html>
