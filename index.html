@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Edge Analog Configuration</title>
+  <title>Standard Analog Configuration</title>
   <link rel='stylesheet' type='text/css' href='css/slate.min.css'>
   <script src='js/slate.min.js'></script>
   <style>
@@ -18,7 +18,7 @@
   </head>
 
   <body>
-    <h1 class='title'>Edge Analog Configuration</h1>
+    <h1 class='title'>Standard Analog Configuration</h1>
 
     <div class='item-container'>
       <div class='item-container-content'>
@@ -79,15 +79,6 @@
       <div class='item-container-header'>Customizability</div>
       <div class='item-container-content'>
         <label class='item'>
-          Round color
-          <input id='round_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
-        </label>
-      </div>
-    </div>
-
-    <div class='item-container'>
-      <div class='item-container-content'>
-        <label class='item'>
           Language for day
           <select id="lang_select" style="color:#000000">
           <option value="en">English</option>
@@ -97,7 +88,19 @@
         </label>
       </div>
     </div>
-
+    
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Rotate watchface
+          <input id='rotate_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        The watchface rotate to the left in charging.
+      </div>
+    </div>
+    
     <div class='item-container'>
       <div class='button-container'>
         <input id='submit_button' type='button' class='item-button' value='SAVE'>
@@ -122,8 +125,8 @@
     var showdayCheckbox = document.getElementById('show_day_checkbox');
     var showsecondCheckbox = document.getElementById('show_second_checkbox');
     var showbatteryCheckbox = document.getElementById('show_battery_checkbox');
-    var roundColorPicker = document.getElementById('round_color_picker');
     var langSelect = document.getElementById('lang_select');
+    var rotateshowbatteryCheckbox = document.getElementById('rotate_checkbox');
  
     var options = {
       'invert': invertCheckbox.checked,
@@ -132,8 +135,8 @@
       'show_day': showdayCheckbox.checked,
       'show_second': showsecondCheckbox.checked,
       'show_battery': showbatteryCheckbox.checked,
-      'round_color': roundColorPicker.value,
-      'lang': langSelect.value
+      'lang': langSelect.value,
+      'rotate': rotateCheckbox.checked
     };
 
     // Save for next launch
@@ -143,8 +146,8 @@
     localStorage['show_day'] = options['show_day'];
     localStorage['show_second'] = options['show_second'];
     localStorage['show_battery'] = options['show_battery'];
-    localStorage['round_color'] = options['round_color'];
     localStorage['lang'] = options['lang'];
+    localStorage['rotate'] = options['rotate'];
 
     console.log('Got options: ' + JSON.stringify(options));
     return options;
@@ -178,8 +181,8 @@
     var showdayCheckbox = document.getElementById('show_day_checkbox');
     var showsecondCheckbox = document.getElementById('show_second_checkbox');
     var showbatteryCheckbox = document.getElementById('show_battery_checkbox');
-    var roundColorPicker = document.getElementById('round_color_picker');
     var langSelect = document.getElementById('lang_select');
+    var rotateCheckbox = document.getElementById('rotate_checkbox');
 
     // Load any previously saved configuration, if available
     invertCheckbox.checked = JSON.parse(localStorage['invert']);
@@ -188,9 +191,9 @@
     showdayCheckbox.checked = JSON.parse(localStorage['show_day']);
     showsecondCheckbox.checked = JSON.parse(localStorage['show_second']);
     showbatteryCheckbox.checked = JSON.parse(localStorage['show_battery']);
-    roundColorPicker.value = localStorage['round_color'];
     langSelect.value = localStorage['lang'];
-    
+    rotateCheckbox.checked = JSON.parse(localStorage['rotate']);
+
   })();
   </script>
 </html>
